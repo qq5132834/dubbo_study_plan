@@ -1,0 +1,7 @@
+1、启动容器  SpringContainer
+
+2、Main.java 中启动
+
+3、Reference.java 注解;  Service。java 注解
+
+4、RegistryProtocol.java 注册协议
