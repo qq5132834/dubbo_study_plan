@@ -1,11 +1,11 @@
-package com.alibaba.dubbo.demo.GenericServiceWay1;
+package com.alibaba.dubbo.demo.GenericServiceWay;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.alibaba.dubbo.demo.DemoService;
 import com.alibaba.fastjson.JSON;
 
-public class Consumer {
+public class Consumer1 {
 	
 	public static void main(String[] args) {
 		

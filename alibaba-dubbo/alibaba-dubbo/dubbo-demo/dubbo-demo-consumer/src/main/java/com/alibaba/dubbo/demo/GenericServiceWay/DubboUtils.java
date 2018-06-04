@@ -78,7 +78,7 @@ private static final Logger Log = Logger.getLogger(DubboUtils.class);
 		
 //		GenericService service = (GenericService) ApplicationContextUtils.getApplicationContext().getBean(beanName);
 		
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"META-INF/spring/dubbo-demo-consumer.xml"});
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"META-INF/spring/dubbo-demo-consumer1.xml"});
 		context.start();
 		GenericService service = (GenericService) context.getBean(beanName);
 		

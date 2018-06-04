@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.alibaba.dubbo.rpc.service.GenericService;
+import com.alibaba.fastjson.JSON;
 
 
 public class DubboUtils {
@@ -55,8 +56,11 @@ private static final Logger Log = Logger.getLogger(DubboUtils.class);
 			}
 		}
 		
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"META-INF/spring/dubbo-demo-consumer.xml"});
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"META-INF/spring/dubbo-demo-consumer1.xml"});
 		context.start();
+		Object obj = context.getBean(beanName);
+		System.out.println(obj.toString());
+		System.out.println(JSON.toJSONString(obj));
 		GenericService service = (GenericService) context.getBean(beanName);
 		
 		if(service == null){
