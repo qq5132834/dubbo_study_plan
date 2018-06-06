@@ -30,6 +30,7 @@ import com.alibaba.dubbo.rpc.service.EchoService;
 public abstract class AbstractProxyFactory implements ProxyFactory {
 
     public <T> T getProxy(Invoker<T> invoker) throws RpcException {
+    	System.out.println(AbstractProxyFactory.class.getName()+".getProxy==");
         Class<?>[] interfaces = null;
         String config = invoker.getUrl().getParameter("interfaces");
         if (config != null && config.length() > 0) {
