@@ -16,8 +16,10 @@
 package com.alibaba.dubbo.registry.zookeeper;
 
 import com.alibaba.dubbo.common.URL;
+import com.alibaba.dubbo.remoting.zookeeper.zkclient.ZkclientZookeeperTransporter;
 
 import junit.framework.Assert;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -34,7 +36,7 @@ public class ZookeeperRegistryTest {
     URL serviceUrl = URL.valueOf("zookeeper://zookeeper/" + service
             + "?notify=false&methods=test1,test2");
     URL consumerUrl = URL.valueOf("zookeeper://consumer/" + service + "?notify=false&methods=test1,test2");
-    // ZookeeperRegistry registry    = new ZookeeperRegistry(registryUrl);
+    ZookeeperRegistry registry    = new ZookeeperRegistry(registryUrl,new ZkclientZookeeperTransporter());
 
     /**
      * @throws java.lang.Exception
@@ -59,8 +61,9 @@ public class ZookeeperRegistryTest {
 
     @Test
     public void testDefaultPort() {
-        Assert.assertEquals("10.20.153.10:2181", ZookeeperRegistry.appendDefaultPort("10.20.153.10:0"));
-        Assert.assertEquals("10.20.153.10:2181", ZookeeperRegistry.appendDefaultPort("10.20.153.10"));
+    	registry.register(registryUrl);
+//        Assert.assertEquals("10.20.153.10:2181", ZookeeperRegistry.appendDefaultPort("10.20.153.10:0"));
+//        Assert.assertEquals("10.20.153.10:2181", ZookeeperRegistry.appendDefaultPort("10.20.153.10"));
     }
 
     /**

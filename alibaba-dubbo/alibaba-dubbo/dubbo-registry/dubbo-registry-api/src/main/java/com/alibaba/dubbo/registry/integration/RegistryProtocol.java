@@ -126,6 +126,7 @@ public class RegistryProtocol implements Protocol {
         
         final URL registedProviderUrl = getRegistedProviderUrl(originInvoker);
         
+        
         System.out.println("开始注册的dubbo。url是:"+JSON.toJSONString(registedProviderUrl));
          
         registry.register(registedProviderUrl);

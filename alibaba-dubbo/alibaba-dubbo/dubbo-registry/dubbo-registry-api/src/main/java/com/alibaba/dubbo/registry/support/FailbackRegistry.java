@@ -20,6 +20,7 @@ import com.alibaba.dubbo.common.URL;
 import com.alibaba.dubbo.common.utils.ConcurrentHashSet;
 import com.alibaba.dubbo.common.utils.NamedThreadFactory;
 import com.alibaba.dubbo.registry.NotifyListener;
+import com.alibaba.fastjson.JSON;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -125,7 +126,8 @@ public abstract class FailbackRegistry extends AbstractRegistry {
 
     @Override
     public void register(URL url) {
-        if (destroyed.get()){
+    	System.out.println(JSON.toJSONString(url));
+    	if (destroyed.get()){
             return;
         }
         super.register(url);

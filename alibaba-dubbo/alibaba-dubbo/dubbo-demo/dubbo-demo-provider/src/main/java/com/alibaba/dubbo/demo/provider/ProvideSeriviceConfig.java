@@ -18,12 +18,13 @@ public class ProvideSeriviceConfig {
 //		ct.start();
 		
 		DemoService dem = new DemoServiceImpl();
-		setProvide();
+		setProvide(20880);
+		setProvide(20881);
 		
 		System.out.println("ok"+dem.sayHello("aaa"));
 		System.out.println("----------------------------------------");
 		
-		setReference();
+//		setReference();
 		
 		try {
 			Thread.sleep(2000);
@@ -33,17 +34,18 @@ public class ProvideSeriviceConfig {
 		}
 	}
 	
-    private static void setProvide(  ) {
+    private static void setProvide( int port ) {
     	
     	ApplicationConfig applicationConfig = new ApplicationConfig();
     	applicationConfig.setName("provide");
     	RegistryConfig registryConfig = new RegistryConfig();
     	registryConfig.setProtocol("zookeeper");
-    	registryConfig.setAddress("localhost");
-    	registryConfig.setPort(2181);
+    	registryConfig.setAddress("127.0.0.1:2181");
+//    	registryConfig.setPort(2181);
     	ProtocolConfig protocolConfig = new ProtocolConfig();
     	protocolConfig.setName("dubbo");
-    	protocolConfig.setPort(20880);
+//    	protocolConfig.setPort(20880);
+    	protocolConfig.setPort(port);
     	protocolConfig.setThreads(200);
     	
     	DemoService bean = new DemoServiceImpl();

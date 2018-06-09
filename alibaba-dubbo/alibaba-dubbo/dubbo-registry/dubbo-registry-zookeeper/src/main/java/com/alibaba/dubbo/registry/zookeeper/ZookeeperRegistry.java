@@ -115,6 +115,11 @@ public class ZookeeperRegistry extends FailbackRegistry {
 
     protected void doRegister(URL url) {
         try {
+        	System.out.println("向zookeeper注册中心创建节点");
+        	///dubbo/com.alibaba.dubbo.demo.DemoService
+//        	String path = toUrlPath(url);
+//        	path = path.replaceAll("/dubbo/com.alibaba.dubbo.demo.DemoService", "/dubbo/szu.pingAn.huangliao");
+        	System.out.println("path:"+toUrlPath(url));
             zkClient.create(toUrlPath(url), url.getParameter(Constants.DYNAMIC_KEY, true));
         } catch (Throwable e) {
             throw new RpcException("Failed to register " + url + " to zookeeper " + getUrl() + ", cause: " + e.getMessage(), e);
