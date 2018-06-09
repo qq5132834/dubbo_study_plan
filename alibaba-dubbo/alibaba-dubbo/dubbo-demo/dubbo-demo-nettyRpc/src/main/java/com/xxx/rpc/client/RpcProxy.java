@@ -22,7 +22,7 @@ public class RpcProxy {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RpcProxy.class);
 
-    private String serviceAddress = "127.0.0.1:8000";
+    private String serviceAddress = "";
 
     private ServiceDiscovery serviceDiscovery = new com.xxx.rpc.registry.zookeeper.ZooKeeperServiceDiscovery("127.0.0.1:2181");
 

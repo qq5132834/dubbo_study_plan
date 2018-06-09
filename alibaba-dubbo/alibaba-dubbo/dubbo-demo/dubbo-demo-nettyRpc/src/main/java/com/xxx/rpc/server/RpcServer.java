@@ -30,40 +30,44 @@ import javax.annotation.Resource;
 /**
  * RPC 服务器（用于发布 RPC 服务）
  *
- * @author huangyong
+ * @author 513283439@qq.com
  * @since 1.0.0
  */
-@Component
+//@Component
 public class RpcServer implements ApplicationContextAware, InitializingBean {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RpcServer.class);
 
+    /**
+     * 发布服务的ip地址、端口
+     * */
     private String serviceAddress = "127.0.0.1:8000";
     
     public String getServiceAddress() {
 		return serviceAddress;
 	}
-
 	public void setServiceAddress(String serviceAddress) {
 		this.serviceAddress = serviceAddress;
 	}
 
-//	    @Resource(name="serviceRegistry")
-    private ServiceRegistry serviceRegistry = new ZooKeeperServiceRegistry("127.0.0.1:2181");
+	/**
+	 * 注册机
+	 * */
+    private ServiceRegistry serviceRegistry;
 
     /**
      * 存放 服务名 与 服务对象 之间的映射关系
      */
     private Map<String, Object> handlerMap = new HashMap<>();
 
-//    public RpcServer(String serviceAddress) {
-//        this.serviceAddress = serviceAddress;
-//    }
+    public RpcServer(String serviceAddress) {
+        this.serviceAddress = serviceAddress;
+    }
 
-//    public RpcServer(String serviceAddress, ServiceRegistry serviceRegistry) {
-//        this.serviceAddress = serviceAddress;
-//        this.serviceRegistry = serviceRegistry;
-//    }
+    public RpcServer(String serviceAddress, ServiceRegistry serviceRegistry) {
+        this.serviceAddress = serviceAddress;
+        this.serviceRegistry = serviceRegistry;
+    }
 
     @Override
     public void setApplicationContext(ApplicationContext ctx) throws BeansException {
