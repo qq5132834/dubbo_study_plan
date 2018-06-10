@@ -55,11 +55,6 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
 	 * */
     private ServiceRegistry serviceRegistry;
 
-    /**
-     * 存放 服务名 与 服务对象 之间的映射关系
-     */
-    private Map<String, Object> handlerMap = new HashMap<>();
-
     public RpcServer(String serviceAddress) {
         this.serviceAddress = serviceAddress;
     }
@@ -68,11 +63,18 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
         this.serviceAddress = serviceAddress;
         this.serviceRegistry = serviceRegistry;
     }
+    
+    /**
+     * 存放 服务名与 服务对象 之间的映射关系
+     */
+    private Map<String, Object> handlerMap = new HashMap<>();
 
     @Override
     public void setApplicationContext(ApplicationContext ctx) throws BeansException {
+    	
         // 扫描带有 RpcService 注解的类并初始化 handlerMap 对象
         Map<String, Object> serviceBeanMap = ctx.getBeansWithAnnotation(RpcService.class);
+        
         if (serviceBeanMap!=null) {
             for (Object serviceBean : serviceBeanMap.values()) {
                 RpcService rpcService = serviceBean.getClass().getAnnotation(RpcService.class);
@@ -86,9 +88,12 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
         }
     }
 
+    /**
+     * netty发布服务
+     * */
     @Override
     public void afterPropertiesSet() throws Exception {
-        EventLoopGroup bossGroup = new NioEventLoopGroup();
+        EventLoopGroup bossGroup =   new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
             // 创建并初始化 Netty 服务端 Bootstrap 对象
@@ -115,6 +120,7 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
             // 注册 RPC 服务地址
             if (serviceRegistry != null) {
                 for (String interfaceName : handlerMap.keySet()) {
+                	//向zookeeper注册
                     serviceRegistry.register(interfaceName, serviceAddress);
                     LOGGER.debug("register service: {} => {}", interfaceName, serviceAddress);
                 }

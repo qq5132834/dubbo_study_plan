@@ -3,7 +3,7 @@ package com.xxx.rpc.service;
 import com.xxx.rpc.server.RpcService;
 
 
-@RpcService(HelloService.class) // 指定远程接口
+@RpcService(value=HelloService.class,name="huagliao") // 指定远程接口
 public class HelloServiceImpl implements HelloService{
 
 	@Override

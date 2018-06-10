@@ -21,10 +21,13 @@ public @interface RpcService {
     /**
      * 服务接口类
      */
-    Class<?> value();
+   public Class<?> value();
 
     /**
      * 服务版本号
      */
-    String version() default "";
+   public String version() default "";
+    
+   public String name();
+    
 }
