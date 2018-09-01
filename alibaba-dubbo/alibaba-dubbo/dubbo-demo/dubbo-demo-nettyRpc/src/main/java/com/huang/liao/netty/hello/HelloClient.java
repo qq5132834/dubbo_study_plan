@@ -1,4 +1,4 @@
-package com.huang.liao.netty.study;
+package com.huang.liao.netty.hello;
 
 import java.io.BufferedReader;
 import java.io.IOException;

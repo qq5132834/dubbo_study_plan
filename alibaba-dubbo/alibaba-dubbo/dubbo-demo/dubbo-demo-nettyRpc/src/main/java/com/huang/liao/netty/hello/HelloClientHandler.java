@@ -1,4 +1,4 @@
-package com.huang.liao.netty.study;
+package com.huang.liao.netty.hello;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

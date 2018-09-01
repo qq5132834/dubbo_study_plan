@@ -1,5 +1,8 @@
 package com.alibaba.dubbo.demo.provider;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.ProtocolConfig;
 import com.alibaba.dubbo.config.ReferenceConfig;
@@ -14,17 +17,15 @@ public class ProvideSeriviceConfig {
 	
 	public static void main(String[] args){
 		
-//		ClassPathXmlApplicationContext ct= new ClassPathXmlApplicationContext("provide-dubbo-context1.xml");
-//		ct.start();
 		
 		DemoService dem = new DemoServiceImpl();
 		setProvide(20880);
-		setProvide(20881);
+//		setProvide(20881);
 		
 		System.out.println("ok"+dem.sayHello("aaa"));
 		System.out.println("----------------------------------------");
 		
-//		setReference();
+		setReference();
 		
 		try {
 			Thread.sleep(2000);
@@ -41,6 +42,13 @@ public class ProvideSeriviceConfig {
     	RegistryConfig registryConfig = new RegistryConfig();
     	registryConfig.setProtocol("zookeeper");
     	registryConfig.setAddress("127.0.0.1:2181");
+    	RegistryConfig registryConfig1 = new RegistryConfig();
+    	registryConfig1.setProtocol("zookeeper");
+    	registryConfig1.setAddress("127.0.0.2:2181");
+    	List<RegistryConfig> registries = new ArrayList<RegistryConfig>();
+    	registries.add(registryConfig);
+    	registries.add(registryConfig1);
+    	
 //    	registryConfig.setPort(2181);
     	ProtocolConfig protocolConfig = new ProtocolConfig();
     	protocolConfig.setName("dubbo");
@@ -54,7 +62,10 @@ public class ProvideSeriviceConfig {
     	
     	
     	
-        service.setApplication(applicationConfig);  
+        service.setApplication(applicationConfig);
+        //集群注册中心
+        service.setRegistries(registries);
+        //单个注册中心
         service.setRegistry(registryConfig);  
         service.setProtocol(protocolConfig);  
 //        service.setMonitor(monitor);  
